@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# commitlint
+echo "🚀 -----------> Install commitlint"
+npm install --save-dev @commitlint/{cli,config-conventional}
+echo "module.exports = { extends: ['@commitlint/config-conventional'] };" > commitlint.config.js
+echo "✅ ----------> commitlint installed successfully"
+
+# Husky
+echo "🚀 ----------> Install Husky"
+npm install husky --save-dev
+npx husky-init
+npm run prepare
+npx husky add .husky/commit-msg ""
+echo "npx --no -- commitlint --edit \$1" >> .husky/commit-msg
+echo "✅ ----------> Husky installed successfully"
+
+# release-it
+echo "🚀 ----------> Install release-it"
+npm install --save-dev release-it
+npm set-script release "release-it"
+echo "{
+  \"git\": {
+    \"commitMessage\": \"chore: release v\${version}\"
+  },
+  \"github\": {
+    \"release\": true
+  },
+  \"npm\": {
+    \"publish\": false
+  }
+}" > .release-it.json
+echo "✅ ----------> release-it successfully installed"
