@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Use this script to quickly setup a new project with commitlint, husky and release-it.
+
 # commitlint
 echo "🚀 -----------> Install commitlint"
 npm install --save-dev @commitlint/{cli,config-conventional}
